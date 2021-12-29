@@ -2,6 +2,8 @@
 
 console.log('>> Ready :)');
 
+//chrome://extensions/
+
 let myLeads = [];
 
 const input = document.querySelector('.js-input');

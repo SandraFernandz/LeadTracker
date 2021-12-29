@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "version": "1.1",
-  "name": "Lead Tracker",
+  "name": "Colibrí Marcador de Enlaces",
   "action": {
     "default_popup": "index.html",
     "default_icon": "colibri.png"
