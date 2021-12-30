@@ -18,6 +18,7 @@ const list = document.querySelector('.js-list');
 function handleSaveTab() {
   // grab the URL of the current tab
   //chrome is an object with have access to when we are online. tabs is a key of this object. query is a method of this object. active stands for current tab
+  // note: add permission "tabs" at manifest.json
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     myLeads.push(tabs[0].url);
     localStorage.setItem('myLeads', JSON.stringify(myLeads));
