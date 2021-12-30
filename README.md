@@ -8,4 +8,4 @@ Don´t lose information ever again! Save tabs and keep them well organised in on
 
 I hope you enjoy it!
 
-Please, feel free to contact me with any improvements or ideas. I will love to connect.
+Please, feel free to contact me with any improvements or ideas. I will love to connect!
