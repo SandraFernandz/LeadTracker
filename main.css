@@ -7,27 +7,31 @@ body {
   min-width: 400px;
 }
 
-.body-input {
+.input {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid grey;
 }
 
-.body-button {
+.title {
+  color: rgb(49, 69, 76);
+}
+
+.button {
   background-color: rgb(74, 101, 111);
   color: white;
-  padding: 10px 120px;
+  padding: 10px 10px;
   border: none;
   font-weight: bold;
   margin-top: 25px;
 }
-.body-list {
+.list {
   list-style-type: none;
   margin-top: 10px;
 }
 
-.body-list-link {
+.list-link {
   font-size: 19px;
   color: rgb(58, 72, 78);
   margin-top: 10px;
