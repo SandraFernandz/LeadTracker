@@ -5,21 +5,38 @@ console.log('>> Ready :)');
 //chrome://extensions/ is where you upload the browser extension
 
 let myLeads = [];
+let oldLeads = [];
 
 const input = document.querySelector('.js-input');
 const addButton = document.querySelector('.js-addButton');
 const deleteButton = document.querySelector('.js-deleteButton');
+const saveTabButton = document.querySelector('.js-saveTabButton');
 const list = document.querySelector('.js-list');
 
+// listen to click event to save the tab
+
+function handleSaveTab() {
+  // grab the URL of the current tab
+  //chrome is an object with have access to when we are online. tabs is a key of this object. query is a method of this object. active stands for current tab
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    myLeads.push(tabs[0].url);
+    localStorage.setItem('myLeads', JSON.stringify(myLeads));
+    renderLeads(myLeads);
+  });
+}
+
+saveTabButton.addEventListener('click', handleSaveTab);
+
 //localStorage.clear();
+
 let leadsFromLocalStorage = JSON.parse(localStorage.getItem('myLeads'));
 
 //if leadsFromLocalStorage is truthy, set myLeads ot its value and call render leads
-
+// by using the myLeads parameter, we ensure that only the "newest" leads are being deleted
 if (leadsFromLocalStorage) {
   //leads of former sessions appear when opening our chrome extension
   myLeads = leadsFromLocalStorage;
-  renderLeads();
+  renderLeads(myLeads);
 }
 
 // empty localStorage with click event
@@ -28,7 +45,7 @@ function handleEmptyLocalStorage() {
   console.log('emptying in process');
   localStorage.clear();
   myLeads = [];
-  renderLeads();
+  renderLeads(myLeads);
 }
 
 deleteButton.addEventListener('click', handleEmptyLocalStorage);
@@ -45,18 +62,20 @@ function handleButtonClick() {
   //Save the myLeads Array to localStorage
   //PS- remember JSON.stringify
   localStorage.setItem('myLeads', JSON.stringify(myLeads));
-  renderLeads();
+  renderLeads(myLeads);
   //to verify that it works
   console.log(localStorage.getItem('myLeads'));
 }
 
 addButton.addEventListener('click', handleButtonClick);
 
-function renderLeads() {
+// we refactor the renderLeads function and improve it adding a "leads" parameter that allows us to decide if we want to render the current session leads or older leads
+
+function renderLeads(leads) {
   let listItems = '';
-  for (let i = 0; i < myLeads.length; i++) {
-    console.log(myLeads[i]);
-    listItems += `<li><a href='${myLeads[i]}' target='_blank' class='list-link'> ${myLeads[i]} </a></li>`;
+  for (let i = 0; i < leads.length; i++) {
+    console.log(leads[i]);
+    listItems += `<li><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
   list.innerHTML = listItems;
 }
