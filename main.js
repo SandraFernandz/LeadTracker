@@ -2,7 +2,7 @@
 
 console.log('>> Ready :)');
 
-//chrome://extensions/ is where you upload the browser extension
+//  * chrome://extensions/ * is where you upload the browser extension
 
 let myLeads = [];
 let oldLeads = [];
@@ -76,7 +76,21 @@ function renderLeads(leads) {
   let listItems = '';
   for (let i = 0; i < leads.length; i++) {
     console.log(leads[i]);
-    listItems += `<li><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
+    listItems += `<li><input type ="checkbox" class ="delItemBtn"><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
   list.innerHTML = listItems;
 }
+
+// delete link after checking  box and clicking delete item button
+
+const deleteItemBtn = document.querySelector('.js-deleteItemButton');
+
+function handleEraseListItem() {
+  console.log('el boton funciona');
+  if (lisItems[i].checked) {
+    console.log(listItems[i]);
+  }
+  markedElement.remove();
+}
+
+deleteItemBtn.addEventListener('click', handleEraseListItem);
