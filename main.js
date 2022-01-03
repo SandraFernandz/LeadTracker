@@ -95,11 +95,16 @@ deleteItemBtn.addEventListener('click', handleEraseListItem);
 
 // check if checkbox is checked
 
-let checkbox = document.querySelector('.js-checkbox');
+//let checkbox = document.querySelector('.js-checkbox');
 
-checkbox.addEventListener('change', (e) => {
-  if (e.target.checked) {
-    //do something
+// checkbox.addEventListener('change', (e) => {
+//   if (e.target.checked) {
+//     //do something
+//     console.log('hola');
+//   }
+// });
+document.querySelectorAll('.js-checkbox').forEach(function (el) {
+  el.addEventListener('change', function () {
     console.log('hola');
-  }
+  });
 });
