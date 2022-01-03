@@ -7,11 +7,20 @@ console.log('>> Ready :)');
 let myLeads = [];
 let oldLeads = [];
 
-const input = document.querySelector('.js-input');
-const addButton = document.querySelector('.js-addButton');
-const deleteButton = document.querySelector('.js-deleteButton');
-const saveTabButton = document.querySelector('.js-saveTabButton');
+const input = document.querySelector('.js-input-el');
+const addButton = document.querySelector('.js-input-btn');
+const saveTabButton = document.querySelector('.js-tab-btn');
+const deleteButton = document.querySelector('.js-delete-btn');
 const list = document.querySelector('.js-list');
+const leadsFromLocalStorage = JSON.parse(localStorage.getItem('myLeads'));
+
+//if leadsFromLocalStorage is truthy, set myLeads ot its value and call render leads
+// by using the myLeads parameter, we ensure that only the "newest" leads are being deleted
+if (leadsFromLocalStorage) {
+  //leads of former sessions appear when opening our chrome extension
+  myLeads = leadsFromLocalStorage;
+  renderLeads(myLeads);
+}
 
 // listen to click event to save the tab
 
@@ -27,18 +36,6 @@ function handleSaveTab() {
 }
 
 saveTabButton.addEventListener('click', handleSaveTab);
-
-//localStorage.clear();
-
-let leadsFromLocalStorage = JSON.parse(localStorage.getItem('myLeads'));
-
-//if leadsFromLocalStorage is truthy, set myLeads ot its value and call render leads
-// by using the myLeads parameter, we ensure that only the "newest" leads are being deleted
-if (leadsFromLocalStorage) {
-  //leads of former sessions appear when opening our chrome extension
-  myLeads = leadsFromLocalStorage;
-  renderLeads(myLeads);
-}
 
 // empty localStorage with click event
 
@@ -76,7 +73,7 @@ function renderLeads(leads) {
   let listItems = '';
   for (let i = 0; i < leads.length; i++) {
     console.log(leads[i]);
-    listItems += `<li><input type ="checkbox" class ="delItemBtn"><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
+    listItems += `<li><input type="checkbox" class="js-checkbox"><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
   list.innerHTML = listItems;
 }
@@ -87,10 +84,22 @@ const deleteItemBtn = document.querySelector('.js-deleteItemButton');
 
 function handleEraseListItem() {
   console.log('el boton funciona');
-  if (lisItems[i].checked) {
-    console.log(listItems[i]);
-  }
-  markedElement.remove();
+
+  // if (lisItems[i].checked) {
+  //   console.log(listItems[i]);
+  // }
+  // markedElement.remove();
 }
 
 deleteItemBtn.addEventListener('click', handleEraseListItem);
+
+// check if checkbox is checked
+
+let checkbox = document.querySelector('.js-checkbox');
+
+checkbox.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    //do something
+    console.log('hola');
+  }
+});
