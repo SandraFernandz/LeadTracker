@@ -82,29 +82,50 @@ function renderLeads(leads) {
 
 const deleteItemBtn = document.querySelector('.js-deleteItemButton');
 
-function handleEraseListItem() {
-  console.log('el boton funciona');
-
-  // if (lisItems[i].checked) {
-  //   console.log(listItems[i]);
-  // }
-  // markedElement.remove();
+function handleDeleteSelectedListItems() {
+  console.log('el delete button funciona');
 }
 
-deleteItemBtn.addEventListener('click', handleEraseListItem);
+deleteItemBtn.addEventListener('click', handleDeleteSelectedListItems);
+
+// function handleEraseListItem(checkedItem) {
+//   console.log('el boton funciona');
+//   //checkedItem.remove();
+//   // markedElement.remove();
+// }
+
+// deleteItemBtn.addEventListener('click', handleEraseListItem);
 
 // check if checkbox is checked
-
 //let checkbox = document.querySelector('.js-checkbox');
-
 // checkbox.addEventListener('change', (e) => {
 //   if (e.target.checked) {
 //     //do something
 //     console.log('hola');
 //   }
 // });
-document.querySelectorAll('.js-checkbox').forEach(function (el) {
-  el.addEventListener('change', function () {
-    console.log('hola');
+
+// create eventListener for ALL checkboxes (which are created dynamically). checkboxes become checkable and on an change event, trigger a handle function
+
+// document.querySelectorAll('.js-checkbox').forEach(function (el) {
+//   el.addEventListener('change', function (ev) {
+//     console.log('hola');
+//     let checkedItem = ev.target;
+//     console.log(checkedItem);
+//     console.log(input.id);
+//   });
+// });
+
+const markCheckbox = document.querySelectorAll('.js-checkbox');
+for (let i = 0; i < markCheckbox.length; i++) {
+  markCheckbox[i].addEventListener('change', function (ev) {
+    console.log(ev.currentTarget);
+    console.log('lo marqué');
+    console.log(markCheckbox[i].checked);
+    if (markCheckbox[i].checked === true) {
+      markCheckbox[i].parentNode.classList.add('completed');
+      console.log('1');
+      markCheckbox[i].id = i;
+    }
   });
-});
+}

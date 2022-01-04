@@ -36,3 +36,7 @@ body {
   color: rgb(58, 72, 78);
   margin-top: 10px;
 }
+
+.completed {
+  background-color: coral;
+}
