@@ -82,8 +82,15 @@ function renderLeads(leads) {
 
 const deleteItemBtn = document.querySelector('.js-deleteItemButton');
 
-function handleDeleteSelectedListItems() {
+function handleDeleteSelectedListItems(ev) {
   console.log('el delete button funciona');
+  console.log(ev.target);
+  ev.preventDefault();
+  let completedItems = list.getElementsByClassName('completed');
+
+  while (completedItems.length > 0) {
+    completedItems.item(0).remove();
+  }
 }
 
 deleteItemBtn.addEventListener('click', handleDeleteSelectedListItems);
@@ -117,6 +124,7 @@ deleteItemBtn.addEventListener('click', handleDeleteSelectedListItems);
 // });
 
 const markCheckbox = document.querySelectorAll('.js-checkbox');
+
 for (let i = 0; i < markCheckbox.length; i++) {
   markCheckbox[i].addEventListener('change', function (ev) {
     console.log(ev.currentTarget);
@@ -124,8 +132,13 @@ for (let i = 0; i < markCheckbox.length; i++) {
     console.log(markCheckbox[i].checked);
     if (markCheckbox[i].checked === true) {
       markCheckbox[i].parentNode.classList.add('completed');
+      selectedListItems.push(markCheckbox[i].parentNode);
       console.log('1');
       markCheckbox[i].id = i;
+    } else if (markCheckbox[i].checked !== true) {
+      markCheckbox[i].parentNode.classList.remove('completed');
     }
   });
 }
+let selectedListItems = [];
+console.log(selectedListItems);
