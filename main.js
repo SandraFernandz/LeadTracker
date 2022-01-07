@@ -20,6 +20,7 @@ if (leadsFromLocalStorage) {
   //leads of former sessions appear when opening our chrome extension
   myLeads = leadsFromLocalStorage;
   renderLeads(myLeads);
+  console.log(myLeads);
   //localStorage.removeItem('listItems');
 }
 
@@ -54,6 +55,7 @@ deleteButton.addEventListener('click', handleEmptyLocalStorage);
 function handleButtonClick() {
   console.log('you clicked me');
   const inputLead = input.value;
+  //if(inputLead.parentNode.checked === true)
   myLeads.push(inputLead);
   console.log(inputLead);
   console.log(myLeads);
@@ -76,7 +78,12 @@ function renderLeads(leads) {
     console.log(leads[i]);
     listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox"><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
+
   list.innerHTML = listItems;
+  console.log(listItems);
+  // if (listItem.class === completed) {
+  //   console.log('completada identificada');
+  // }
   // localStorage.setItem('listItems', JSON.stringify(listItems));
 }
 
@@ -87,11 +94,10 @@ const deleteItemBtn = document.querySelector('.js-deleteItemButton');
 function handleDeleteSelectedListItems(ev) {
   console.log('el delete button funciona');
   console.log(ev.target);
-  ev.preventDefault();
   let completedItems = list.getElementsByClassName('completed');
   while (completedItems.length > 0) {
     completedItems.item(0).remove();
-    // localStorage.removeItem('listItems');
+    localStorage.removeItem(completedItems);
   }
 }
 
@@ -130,18 +136,26 @@ const markCheckbox = document.querySelectorAll('.js-checkbox');
 let selectedListItems = [];
 console.log(selectedListItems);
 
-for (let i = 0; i < markCheckbox.length; i++) {
-  markCheckbox[i].addEventListener('change', function (ev) {
-    console.log(ev.currentTarget);
-    console.log('lo marqué');
-    console.log(markCheckbox[i].checked);
-    if (markCheckbox[i].checked === true) {
-      markCheckbox[i].parentNode.classList.add('completed');
-      selectedListItems.push(markCheckbox[i].parentNode);
-      console.log('1');
-      markCheckbox[i].id = i;
-    } else if (markCheckbox[i].checked !== true) {
-      markCheckbox[i].parentNode.classList.remove('completed');
-    }
-  });
+function addCompletedClassToLiElement() {
+  for (let i = 0; i < markCheckbox.length; i++) {
+    markCheckbox[i].addEventListener('change', function (ev) {
+      console.log(markCheckbox[i].parentNode);
+      console.log('lo marqué');
+      console.log(markCheckbox[i].checked);
+      if (markCheckbox[i].checked === true) {
+        markCheckbox[i].parentNode.classList.add('completed');
+
+        myLeads.splice(i, 1);
+        localStorage.setItem('myLeads', JSON.stringify(myLeads));
+
+        console.log(myLeads);
+        selectedListItems.push(markCheckbox[i].parentNode);
+        console.log('1');
+        markCheckbox[i].id = i;
+      } else if (markCheckbox[i].checked !== true) {
+        markCheckbox[i].parentNode.classList.remove('completed');
+      }
+    });
+  }
 }
+addCompletedClassToLiElement();
