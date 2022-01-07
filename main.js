@@ -20,6 +20,7 @@ if (leadsFromLocalStorage) {
   //leads of former sessions appear when opening our chrome extension
   myLeads = leadsFromLocalStorage;
   renderLeads(myLeads);
+  //localStorage.removeItem('listItems');
 }
 
 // listen to click event to save the tab
@@ -73,9 +74,10 @@ function renderLeads(leads) {
   let listItems = '';
   for (let i = 0; i < leads.length; i++) {
     console.log(leads[i]);
-    listItems += `<li><input type="checkbox" class="js-checkbox"><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
+    listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox"><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
   list.innerHTML = listItems;
+  // localStorage.setItem('listItems', JSON.stringify(listItems));
 }
 
 // delete link after checking  box and clicking delete item button
@@ -87,9 +89,9 @@ function handleDeleteSelectedListItems(ev) {
   console.log(ev.target);
   ev.preventDefault();
   let completedItems = list.getElementsByClassName('completed');
-
   while (completedItems.length > 0) {
     completedItems.item(0).remove();
+    // localStorage.removeItem('listItems');
   }
 }
 
@@ -125,6 +127,9 @@ deleteItemBtn.addEventListener('click', handleDeleteSelectedListItems);
 
 const markCheckbox = document.querySelectorAll('.js-checkbox');
 
+let selectedListItems = [];
+console.log(selectedListItems);
+
 for (let i = 0; i < markCheckbox.length; i++) {
   markCheckbox[i].addEventListener('change', function (ev) {
     console.log(ev.currentTarget);
@@ -140,5 +145,3 @@ for (let i = 0; i < markCheckbox.length; i++) {
     }
   });
 }
-let selectedListItems = [];
-console.log(selectedListItems);
