@@ -1,9 +1,10 @@
 body {
   padding: 2rem;
-  height: 100vh;
+  height: 40vh;
   background-color: blue;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(151, 192, 208);
+  background-color: #eef0f3;
+  /* background-color: rgb(151, 192, 208); */
   min-width: 400px;
 }
 
@@ -29,14 +30,25 @@ body {
 .list {
   list-style-type: none;
   margin-top: 10px;
+  margin-right: 50px;
 }
 
 .list-link {
   font-size: 19px;
   color: rgb(58, 72, 78);
   margin-top: 10px;
+  margin-right: 50px;
 }
 
 .completed {
   background-color: coral;
+}
+
+.delete-btn {
+  background-color: #d7b5ae;
+  /* #ee4e34; */
+  /* #cd8f32; */
+}
+.add-btn {
+  background-color: rgb(127, 174, 149);
 }

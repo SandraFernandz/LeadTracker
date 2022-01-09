@@ -16,13 +16,17 @@ const leadsFromLocalStorage = JSON.parse(localStorage.getItem('myLeads'));
 
 //if leadsFromLocalStorage is truthy, set myLeads ot its value and call render leads
 // by using the myLeads parameter, we ensure that only the "newest" leads are being deleted
-if (leadsFromLocalStorage) {
-  //leads of former sessions appear when opening our chrome extension
-  myLeads = leadsFromLocalStorage;
-  renderLeads(myLeads);
-  console.log(myLeads);
-  //localStorage.removeItem('listItems');
+function getLeadsFromLocalStorage() {
+  if (leadsFromLocalStorage) {
+    //leads of former sessions appear when opening our chrome extension
+    myLeads = leadsFromLocalStorage;
+    renderLeads(myLeads);
+    console.log(myLeads);
+    //localStorage.removeItem('listItems');
+  }
 }
+getLeadsFromLocalStorage();
+renderLeads(myLeads);
 
 // listen to click event to save the tab
 
@@ -76,7 +80,7 @@ function renderLeads(leads) {
   let listItems = '';
   for (let i = 0; i < leads.length; i++) {
     console.log(leads[i]);
-    listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox"><a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
+    listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox"> <a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
 
   list.innerHTML = listItems;
@@ -95,8 +99,12 @@ function handleDeleteSelectedListItems(ev) {
   console.log('el delete button funciona');
   console.log(ev.target);
   let completedItems = list.getElementsByClassName('completed');
-  while (completedItems.length > 0) {
-    completedItems.item(0).remove();
+  // while (completedItems.length > 0) {
+  //   completedItems.item(0).remove();
+  //   localStorage.removeItem(completedItems);
+  // }
+  for (let i = 0; i < completedItems.length; i++) {
+    completedItems[i].remove();
     localStorage.removeItem(completedItems);
   }
 }
