@@ -80,7 +80,7 @@ function renderLeads(leads) {
   let listItems = '';
   for (let i = 0; i < leads.length; i++) {
     console.log(leads[i]);
-    listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox"> <a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
+    listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox checkbox-style"> <a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
 
   list.innerHTML = listItems;
