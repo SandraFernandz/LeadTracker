@@ -80,14 +80,11 @@ function renderLeads(leads) {
   let listItems = '';
   for (let i = 0; i < leads.length; i++) {
     console.log(leads[i]);
-    listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox checkbox-style"> <a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
+    listItems += `<li id='${i}'><input type="checkbox" class="js-checkbox"> <a href='${leads[i]}' target='_blank' class='list-link'> ${leads[i]} </a></li>`;
   }
 
   list.innerHTML = listItems;
   console.log(listItems);
-  // if (listItem.class === completed) {
-  //   console.log('completada identificada');
-  // }
   // localStorage.setItem('listItems', JSON.stringify(listItems));
 }
 
@@ -153,13 +150,13 @@ function addCompletedClassToLiElement() {
       if (markCheckbox[i].checked === true) {
         markCheckbox[i].parentNode.classList.add('completed');
 
-        myLeads.splice(i, 1);
-        localStorage.setItem('myLeads', JSON.stringify(myLeads));
+        // myLeads.splice(i, 1);
+        // localStorage.setItem('myLeads', JSON.stringify(myLeads));
 
-        console.log(myLeads);
-        selectedListItems.push(markCheckbox[i].parentNode);
-        console.log('1');
-        markCheckbox[i].id = i;
+        // console.log(myLeads);
+        // selectedListItems.push(markCheckbox[i].parentNode);
+        // console.log('1');
+        // markCheckbox[i].id = i;
       } else if (markCheckbox[i].checked !== true) {
         markCheckbox[i].parentNode.classList.remove('completed');
       }
